@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC
+  "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- Clase para mostrar el archivo log en consola-->
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%c] -%m%n" />
+        </layout>
+    </appender>
+    <!-- Clase para guardar el registro de log en un archivo -->
+    <appender name="rollingFile" class="org.apache.log4j.RollingFileAppender">
+        <!-- Ruta donde se guardan los logs-->
+        <param name="File" value="/Users/avilchis/Documents/logs/springloginec.log" />
+        <param name="MaxFileSize" value="512KB" />
+        <!-- Numero de respaldos -->
+        <param name="MaxBackupIndex" value="10" />
+        <param name="Encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%c] -%m%n" />
+        </layout>
+    </appender>
+    
+    <root>
+        <priority value="INFO" />
+        <appender-ref ref="stdout" />
+        <appender-ref ref="rollingFile" />
+    </root>
+    
+</log4j:configuration>
