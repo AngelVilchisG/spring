@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+         xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    <!-- 
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/properties/log4j.properties</param-value>
+    </context-param>
+    -->
+    <!-- Servlet de Log4j para Test -->
+    <!--
+    <servlet>
+        <description>Se define la clase para testing servlet</description>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>com.mx.avilchis.examples.util.TestLog4jServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    -->
+    <!-- Servlet de Log4j para arranque de  applicación-->
+    <servlet>
+        <description>Se define la clase para la inicialización del servlet</description>
+        <servlet-name>Log4jAppServlet</servlet-name>
+        <servlet-class>com.mx.avilchis.examples.util.Log4jServletTest</servlet-class>
+        <init-param>
+            <param-name>log4jConfigLocation</param-name>
+            <param-value>/WEB-INF/properties/log4j.properties</param-value>
+        </init-param>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    
+    <listener>
+        <listener-class>com.mx.avilchis.examples.util.ContextListener</listener-class>
+    </listener>
+    <!-- 
+    <servlet-mapping>
+        <description>Servlet para Test</description>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    -->
+    <servlet-mapping>
+        <servlet-name>Log4jAppServlet</servlet-name>
+        <url-pattern>/init</url-pattern>
+    </servlet-mapping>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/jsp/redirect.jsp</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <location>/WEB-INF/jsp/error.jsp</location>
+    </error-page>
+</web-app>
